@@ -8,6 +8,8 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 
+save_path = '../data/'
+
 GET_URI = "login-metrics"
 
 def main():
@@ -25,11 +27,25 @@ def main():
 
 def state_manager(fetched_data):
     for data in range(len(fetched_data)):
-        for new_data in fetched_data[data].json():
-            print(new_data['public_ip'])
+        new_data = fetched_data[data].json()
+        for logins in new_data:
+            completeName = os.path.join(save_path,"metadata.txt")
+            try:
+                with open(completeName,'w') as file:
+                    file.write(json.dumps(logins))
+            except Exception as e:
+                print(e)
 
-
-
+def reader():
+    response = []
+    completeName = os.path.join(save_path,"metadata.txt")
+    with open(completeName,'r') as file:
+        file_data=file.read()
+        json_data = json.loads(file_data)
+        for data in json_data["events"]:
+            if 'still' in data:
+                response.append({"ip":json_data["public_ip"],"hostname":json_data["hostname"],"logged_events":data})
+    return response
 
 def data_fetcher(ips_list,port):
     response_list = []
