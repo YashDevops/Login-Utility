@@ -21,7 +21,7 @@ def parser(string):
         print(metadata[0]['public_ip'])
         result.append({"public_ip":metadata[0]['public_ip'],"hostname":metadata[0]['hostname'],"release":metadata[0]['release'],"sysname":metadata[0]['sysname'],"events":events})
         return result
-    except exception as e:
+    except Exception as e:
         logger.debug("something went wrong",exception)
         return "something went wrong"
 
@@ -38,6 +38,6 @@ def metadata_fetcher():
         ip = get('https://api.ipify.org').text
         metadata.append({"public_ip":ip,"hostname":data.nodename,"release":data.release,"arch":data.machine,"sysname":data.sysname})
         return metadata
-    except exception as e:
+    except Exception as e:
         logger.debug("While fetching the public ip via metadata following error occured",exception)
         return exception

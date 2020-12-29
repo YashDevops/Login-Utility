@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask , request
 from flask_restful import Resource, Api
 import logging
@@ -42,7 +43,7 @@ class Datasource(Resource):
                 logging.debug("Command executed successfully sending stdout for parsing")
                 output=helper.parser(process.stdout)
             return output
-        except exception as e:
+        except Exception as e:
             logging.debug("The exist code is not 0 {}".format(process.stderr))
             print(process.stderr)
 
