@@ -2,7 +2,6 @@ import os
 from requests import get
 
 ip = get('https://api.ipify.org').text
-print('My public IP address is: {}'.format(ip))
 
 def parser(string):
     '''
@@ -17,9 +16,7 @@ def parser(string):
         data = string.split("\n")
         for each_login in range(len(data)):
             new_data = data[each_login].split()
-            print(new_data)
             events.append(new_data)
-        print(metadata[0]['public_ip'])
         result.append({"public_ip":metadata[0]['public_ip'],"hostname":metadata[0]['hostname'],"release":metadata[0]['release'],"sysname":metadata[0]['sysname'],"events":events})
         return result
     except Exception as e:

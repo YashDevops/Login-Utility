@@ -6,10 +6,8 @@ import client
 
 def main():
     print("ip","\t\t","Hostname","  ","User"," ","Terminal","Login At","\t\t","Status")
-    while True:
-        cli_viewer()
-        time.sleep(10)
-        os.system('clear')
+    cli_viewer()
+
 
 def cli_viewer():
     data = client.reader()

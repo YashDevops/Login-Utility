@@ -6,9 +6,8 @@ from configparser import ConfigParser
 
 config = configparser.ConfigParser()
 config.read('config.ini')
-
-
 save_path = '../data/'
+completeName = os.path.join(save_path,"metadata.txt")
 
 GET_URI = "login-metrics"
 
@@ -26,10 +25,10 @@ def main():
 
 
 def state_manager(fetched_data):
+    lcompleteName = os.path.join(save_path,"metadata.txt")
     for data in range(len(fetched_data)):
         new_data = fetched_data[data].json()
         for logins in new_data:
-            completeName = os.path.join(save_path,"metadata.txt")
             try:
                 with open(completeName,'w') as file:
                     file.write(json.dumps(logins))

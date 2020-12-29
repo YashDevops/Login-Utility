@@ -37,8 +37,8 @@ class Datasource(Resource):
         '''
             get function to fetch logging mertics from the server and parse it if the command exit code it 0
         '''
+        process = subprocess.run("last",shell=True ,stdout = subprocess.PIPE, universal_newlines=True)
         try:
-            process = subprocess.run("last",shell=True ,stdout = subprocess.PIPE, text=True)
             if process.returncode == 0:
                 logging.debug("Command executed successfully sending stdout for parsing")
                 output=helper.parser(process.stdout)
