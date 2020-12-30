@@ -1,0 +1,9 @@
+---
+# tasks file for copy
+- name: Copying Nginx Config
+  copy:
+    src: "{{src_path}}"
+    dest: "{{dest_path}}"
+    owner: "{{copy_owner}}"
+    group: "{{group_owner}}"
+    mode: "{{mode}}"

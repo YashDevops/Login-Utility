@@ -1,0 +1,5 @@
+---
+# tasks file for raw_module
+- name: Bootstrap a legacy python 2.7 host
+  raw: "apt update; apt install python-pip -y;"
+  become: true

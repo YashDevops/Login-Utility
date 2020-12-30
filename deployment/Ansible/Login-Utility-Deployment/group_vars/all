@@ -1,0 +1,7 @@
+repo_list: ['python3','python3-pip',supervisor]
+requirements_path: "/home/ubuntu/Login-Utility/agent/requirements.txt"
+src_path: "../../../config/supervisor-conf/agent.conf"
+dest_path: "/etc/supervisor/conf.d/agent.conf"
+copy_owner: "root"
+group_owner: "root"
+service_name: "supervisor"

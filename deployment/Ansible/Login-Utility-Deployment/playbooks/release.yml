@@ -1,0 +1,11 @@
+- name: Playbook for Releasing App  Servers
+  hosts: all
+  serial: 1
+  become: true
+  vars_files:
+    - ../group_vars/all
+  roles:
+    - ../../roles/apt
+    - ../../roles/pip-install
+    - ../../roles/copy
+    - ../../roles/service

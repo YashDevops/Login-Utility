@@ -1,0 +1,18 @@
+---
+# tasks file for apt repo setup
+#@author yash kumar shah yash kumar shah
+- name: Installing Dependency
+  apt: name={{repo_list}} state=present update_cache=yes
+  retries: 10
+  delay: 3
+  register: result
+  until: result is succeeded
+
+- name: Install the MySQL-python through pip
+  sudo: yes
+  pip:
+    name: "{{ item }}"
+    state: forcereinstall
+  with_items:
+    - flask
+    - flask_restful
