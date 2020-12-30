@@ -69,7 +69,7 @@ Both `Agent` and `Client` requires python3 to start and working
 
 
 
-# :rocket: Launch
+# :rocket: Launch {Agent Infra | Application Setup}
 
 
 ### Deployment
@@ -124,3 +124,46 @@ terraform apply -var 'Name=yashshah' -var 'Team=infra-team' -var 'Project=login-
 ```
 
 The following variable pass on with the commands are for the Tagging purpose of the complete project. There is another variable called `{canonical_id}` you can substitute it with the `canonical id` of your account which you can get via `step3`
+
+
+
+5. Copy The Node Ip
+
+```
+Apply complete! Resources: 22 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+Node1 = X.X.X.X
+
+```
+
+
+
+# :rocket: Launch {Client}
+
+1. Teleport yourself to the client code
+
+```
+cd Login-Utility/client/bin
+```
+
+2. Edit the `config.ini`
+
+```
+[config]
+#List all the ips that have agent installed in it. You can add multiple ip like : ip1, ip2
+ips = ## Paste Your Node IP which you copied in the step 5 of lauching client
+#Port Number in which the application is running
+port = 5000
+
+```
+
+
+3. Run the Client python app
+
+## :warning: Make sure python3 is set as your default python. Coz some methods are not supported in python2
+
+```
+python3 app.py
+```
