@@ -8,7 +8,7 @@
   register: result
   until: result is succeeded
 
-- name: Install the MySQL-python through pip
+- name: Install Flask and Flask RESTful through pip
   sudo: yes
   pip:
     name: "{{ item }}"

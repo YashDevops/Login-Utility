@@ -1,10 +1,5 @@
 #the main.tf file
-data "aws_subnet_ids" "subnet" {
-  vpc_id = module.vpc.vpc_id
-  tags = {
-    Type = "public"
-  }
-}
+
 
 resource "null_resource" "cluster" {
   # Bootstrap script can run on any instance of the cluster
@@ -32,7 +27,7 @@ resource "null_resource" "cluster" {
       "git clone https://github.com/YashDevops/Login-Utility.git",
       "sleep 10s",
       "chmod 400 /home/ubuntu/.ssh/id_rsa",
-      "ansible-playbook Assignment/Ansible/Login-Utility-Deployment/playbooks/release.yml -i localhost, -u ubuntu -e 'ansible_python_interpreter=/usr/bin/python3'",
+      "ansible-playbook Login-Utility/deployment/Ansible/Login-Utility-Deployment/playbooks/release.yml -i localhost, -u ubuntu -e 'ansible_python_interpreter=/usr/bin/python3'",
       "sleep 60s"
     ]
     on_failure = continue
