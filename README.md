@@ -1,16 +1,21 @@
 # Login Utility (client-agent)
 
 #### Problem Statement
-Design a client server utility to fetch the number of ssh done from a particular node (where alpha-server is installed) to the server {where alpha-client is running} and get the details done by the respective node to that server
-
+* Design a {Client-Agent} utility such that the agent can be installed on any instance and client has the ability to fetch login details from all the instances such.
+* Create adeployment Stack for the above utility too
 ***
 
 #### Approach
 
 After going through the problem statement the first thing that came up on my mind was prometheus. Prometheus is a pull based metric fetcher. So I started designing same system design in my mind.
 
+* Created a flask api which call and external command `[last]` and generate a json with adding instance metadata with it.
+* Created a python script that will call tha flask API and parse the json and manage state in local in flat file. And the provide the data by the state file.
 
-### Tool Used
+### Language used :
+- python3
+
+### Tool Used For Deployment
 
 * Terraform
 * Ansible
@@ -47,7 +52,9 @@ $ sudo apt-add-repository --yes --update ppa:ansible/ansible
 $ sudo apt install ansible
 ```
 
-#### 1. Agent :
+
+
+#### 1. About Agent :
 A simple python_flask api that uses external command `last` to fetch data from system and the create a json with metadata and all the login events.
 ```
 uri : /login-metrics
@@ -59,8 +66,6 @@ port : 5000
 #### 2. Client :
 A Python Utility that fetches the list of `IP's` from config.ini and use request module to call the `/login-metrics` URI from the agent and manage the state of all the events in `data` folder
 
-### Language used :
-- python3
 
 ### Prerequisites
 :exclamation: Bugs
@@ -167,3 +172,8 @@ port = 5000
 ```
 python3 app.py
 ```
+
+
+
+### Built With : 
+#### 1 https://api.ipify.org : For Fetching Public_Ip
