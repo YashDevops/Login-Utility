@@ -25,6 +25,11 @@ def main():
 
 
 def state_manager(fetched_data):
+    '''
+        method to save the fetched_data from agents
+        params : fetched_data , all the agent events json
+
+    '''
     lcompleteName = os.path.join(save_path,"metadata.txt")
     for data in range(len(fetched_data)):
         new_data = fetched_data[data].json()
@@ -36,6 +41,9 @@ def state_manager(fetched_data):
                 print(e)
 
 def reader():
+    '''
+        method to read data from state file and pass on the output to cli_viewer() method
+    '''
     response = []
     completeName = os.path.join(save_path,"metadata.txt")
     with open(completeName,'r') as file:
@@ -47,6 +55,13 @@ def reader():
     return response
 
 def data_fetcher(ips_list,port):
+    '''
+        method fetched list of ips from config_parser() method and call the agents url under specific ip and port
+        params:
+            ips_list : list of ips where agents are setup
+            port : The port where the agent is listening on
+
+    '''
     response_list = []
     for data in range(len(ips_list)):
         ips=ips_list[data]
@@ -59,6 +74,10 @@ def data_fetcher(ips_list,port):
     return(response_list)
 
 def config_parser():
+    '''
+        config_parser() method to parse data from config.ini which contains list of ips and port
+
+    '''
     response=[]
     option_values = config.get("config","ips")
     port = config.get("config","port")
