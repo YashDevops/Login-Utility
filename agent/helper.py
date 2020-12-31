@@ -9,15 +9,16 @@ def parser(string):
 
         params : string : <type(str)>
     '''
-    result = []
-    events = []
     try:
+        result = []
+        events = []
         metadata=metadata_fetcher()
         data = string.split("\n")
         for each_login in range(len(data)):
             new_data = data[each_login].split()
-            events.append(new_data)
-        result.append({"public_ip":metadata[0]['public_ip'],"hostname":metadata[0]['hostname'],"release":metadata[0]['release'],"sysname":metadata[0]['sysname'],"events":events})
+            if "still" in new_data:
+                events.append(new_data)
+        result={"public_ip":metadata[0]['public_ip'],"hostname":metadata[0]['hostname'],"release":metadata[0]['release'],"sysname":metadata[0]['sysname'],"events":events}
         return result
     except Exception as e:
         logger.debug("something went wrong",exception)
