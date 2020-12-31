@@ -1,4 +1,4 @@
 output "Node1" {
-  description = "This is the  Bastion-IP to access Application Server"
+  description = "Node 1 Public_IP :"
   value       = module.node1.public_ip
 }

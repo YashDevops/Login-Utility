@@ -30,15 +30,13 @@ def state_manager(fetched_data):
         params : fetched_data , all the agent events json
 
     '''
-    lcompleteName = os.path.join(save_path,"metadata.txt")
+    result = []
+    open(completeName, "w").close()
     for data in range(len(fetched_data)):
         new_data = fetched_data[data].json()
-        for logins in new_data:
-            try:
-                with open(completeName,'w') as file:
-                    file.write(json.dumps(logins))
-            except Exception as e:
-                print(e)
+        result.append(new_data)
+    with open(completeName,'a') as file:
+        file.write(json.dumps(result))
 
 def reader():
     '''
@@ -47,11 +45,10 @@ def reader():
     response = []
     completeName = os.path.join(save_path,"metadata.txt")
     with open(completeName,'r') as file:
-        file_data=file.read()
-        json_data = json.loads(file_data)
-        for data in json_data["events"]:
-            if 'still' in data:
-                response.append({"ip":json_data["public_ip"],"hostname":json_data["hostname"],"logged_events":data})
+        for jsonobj in file:
+            json_data = json.loads(jsonobj)
+            for data in range(len(json_data)):
+                response.append({"ip":json_data[data]["public_ip"],"hostname":json_data[data]["hostname"],"logged_events":json_data[data]["events"]})
     return response
 
 def data_fetcher(ips_list,port):
@@ -70,7 +67,7 @@ def data_fetcher(ips_list,port):
             result=requests.get(url)
             response_list.append(result)
         except Exception as e:
-            print("Exception occured")
+            print("It's Seems like One of the agent is down",ips)
     return(response_list)
 
 def config_parser():

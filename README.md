@@ -1,16 +1,16 @@
 # Login Utility {client-agent}
 
 #### Problem Statement
-* Design a {Client-Agent} utility such that the agent can be installed on any instance and client has the ability to fetch login details from all the instances such.
-* Create adeployment Stack for the above utility too
+* Design a {Client-Agent} utility such that the agent can be installed on any instance and client has the ability to fetch login details from all the instances where agent are installed.
+* Create a deployment Stack for the above utility too
 ***
 
 #### Approach
 
-After going through the problem statement the first thing that came up on my mind was prometheus. Prometheus is a pull based metric fetcher. So I started designing same system design in my mind.
+After going through the problem statement the first thing that came up on my mind was prometheus. Prometheus is a pull based metric fetcher. So I started designing system in the same way.
 
 * Created a flask api which call and external command `[last]` and generate a json with adding instance metadata with it.
-* Created a python script that will call tha flask API and parse the json and manage state in local in flat file. And the provide the data by the state file.
+* Created a python `client` that will call flask `API` based on the `instance IP's` added in the `config.ini` and parse the json and manage state in local in flat file. And the provide the data to the `cli` from state file.
 
 ### Language used :
 - python3
@@ -150,7 +150,7 @@ Node1 = X.X.X.X
 1. Teleport yourself to the client code
 
 ```
-cd Login-Utility/client/bin
+cd ../../../../client/bin/
 ```
 
 2. Edit the `config.ini`
@@ -158,7 +158,7 @@ cd Login-Utility/client/bin
 ```
 [config]
 #List all the ips that have agent installed in it. You can add multiple ip like : ip1, ip2
-ips = ## Paste Your Node IP which you copied in the step 5 of lauching client
+ips =                             ## Paste Your Node IP which you copied in the step 5 of launching agents, You can multiple agents IPS
 #Port Number in which the application is running
 port = 5000
 
@@ -167,7 +167,7 @@ port = 5000
 
 3. Run the Client python app
 
-## :warning: Make sure python3 is set as your default python. Coz some methods are not supported in python2
+#### :warning: Make sure python3 is set as your default python. Some methods are not supported in python2. By default the global modules of python3 are supported by for reference an addition requirements.txt is place in `Login-Utility/client/bin/`.
 
 ```
 python3 app.py
@@ -175,5 +175,5 @@ python3 app.py
 
 
 
-### Built With : 
+### Built With :
 #### 1 https://api.ipify.org : For Fetching Public_Ip

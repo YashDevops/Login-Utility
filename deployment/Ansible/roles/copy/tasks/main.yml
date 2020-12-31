@@ -1,6 +1,6 @@
 ---
 # tasks file for copy
-- name: Copying Nginx Config
+- name: Copying Supervisor Config
   copy:
     src: "{{src_path}}"
     dest: "{{dest_path}}"

@@ -44,7 +44,7 @@ module "vpc" {
 
 module "key" {
   source             = "../../../modules/keys"
-  key_name           = "mediawiki-keys"
+  key_name           = "node1-keys"
   PATH_TO_PUBLIC_KEY = "../../../keys/id_rsa.pub"
 }
 
